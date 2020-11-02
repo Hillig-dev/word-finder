@@ -1,0 +1,11 @@
+Der String-Parameter des Konstruktors bezeichnet dabei den Namen der Da- tei, aus der gelesen werden soll. In der Praxis reicht es meistens nicht aus, nur den Typen der Klasse zu adaptieren. Vielmehr sind häufig auch Methoden anzupassen oder neue hinzuzufügen. Dies ändert aber nichts am Prinzip: Ad- apterklassen passen die Schnittstelle existierender Bausteine an, damit diese von Klienten benutzt werden können, die eine andere Schnittstelle erwarten.
+Hier noch eine alternative Realisierung der Klasse DateiLeser, die ohne Subclassing auskommt und trotzdem die Fähigkeiten der schon vorhandenen Klasse FileReader verwendet:
+public class DateiLeser2 implements CharEingabeStrom {
+    private FileReader quelle;
+public DateiLeser2(String dateiName) throws IOException { quelle = new FileReader(dateiName);
+}
+    @Override
+    public int read() throws IOException {
+return quelle.read(); }
+}
+Die Objekte der Klasse DateiLeser2 sind keine FileReader, sondern sie benutzen intern einen FileReader. Dieses Muster hat gegenüber der ersten Variante einige Vorzüge:
